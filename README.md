@@ -15,18 +15,18 @@ See the [projectTemplate README](https://github.com/caseyanderson/projectTemplat
 
 ## Files
 
-- `reaperSessionSetup.lua`: synchronizes bridge-managed REAPER recording tracks
-- `reaperAudioDeviceDiagnostic.lua`: reports REAPER’s audio-device configuration
+- `sessionSetup.lua`: synchronizes bridge-managed REAPER recording tracks
+- `audioDeviceDiagnostic.lua`: reports REAPER’s audio-device configuration
 - `reaperSessionManifest.scd`: publishes and clears SuperCollider recording manifests
 
 ## Install the REAPER actions
 
 1. In REAPER, open **Actions → Show action list**
 2. Choose **New action → Load ReaScript**
-3. Load `~/reaperSessionBridge/reaperSessionSetup.lua`
+3. Load `~/reaperSessionBridge/sessionSetup.lua`
 4. Confirm that **Synchronize SuperCollider recording tracks** appears in the action list
 5. Choose **New action → Load ReaScript**
-6. Load `~/reaperSessionBridge/reaperAudioDeviceDiagnostic.lua`
+6. Load `~/reaperSessionBridge/audioDeviceDiagnostic.lua`
 
 REAPER runs the current contents of these files. Updated versions do not need to be added to the action list again.
 
@@ -134,7 +134,7 @@ A managed track containing media is not removed automatically.
 
 ## Audio-device diagnostic
 
-Run `reaperAudioDeviceDiagnostic.lua` from REAPER’s action list to display:
+Run `audioDeviceDiagnostic.lua` from REAPER’s action list to display:
 
 - Operating system
 - Audio mode

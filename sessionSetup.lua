@@ -200,15 +200,22 @@ local operatingSystem = reaper.GetOS()
 local _, audioMode = reaper.GetAudioDeviceInfo("MODE")
 local _, inputDevice = reaper.GetAudioDeviceInfo("IDENT_IN")
 local _, outputDevice = reaper.GetAudioDeviceInfo("IDENT_OUT")
+local audioDeviceInfoAvailable =
+    audioMode ~= ""
+    or inputDevice ~= ""
+    or outputDevice ~= ""
 local userHome
 local pathSeparator
 local inputMonitoring
 local configureMasterOutput = false
 
 if operatingSystem == "Win64" then
-    if audioMode ~= "ASIO"
-        or inputDevice ~= windowsDevice
-        or outputDevice ~= windowsDevice
+    if audioDeviceInfoAvailable
+        and (
+            audioMode ~= "ASIO"
+            or inputDevice ~= windowsDevice
+            or outputDevice ~= windowsDevice
+        )
     then
         stop(
             "Configure REAPER to use Voicemeeter Virtual ASIO."
@@ -223,8 +230,11 @@ if operatingSystem == "Win64" then
     pathSeparator = "\\"
     inputMonitoring = 0
 elseif operatingSystem:match("^macOS") then
-    if inputDevice ~= macDevice
-        or outputDevice ~= macDevice
+    if audioDeviceInfoAvailable
+        and (
+            inputDevice ~= macDevice
+            or outputDevice ~= macDevice
+        )
     then
         stop(
             "Configure REAPER to use BlackHole + MixPre."

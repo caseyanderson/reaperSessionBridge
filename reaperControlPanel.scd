@@ -4,36 +4,24 @@
 ~reaperControlWindow.tryPerform(\close);
 
 ~reaperControlPanel = (
-    address: NetAddr(
-        "127.0.0.1",
-        8000
-    ),
+    address: NetAddr( "127.0.0.1", 8000 ),
 
     readManifest: {
-        var manifest;
-        var manifestPath;
+        var manifest, manifestPath;
 
         manifestPath =
-        ~reaperSessionBridge.tryPerform(
-            \at,
-            \manifestPath
-        );
+        ~reaperSessionBridge.tryPerform( \at, \manifestPath );
 
-        manifest = (
-            project: "No published project",
-            sources: List.new
-        );
+        manifest = ( project: "No published project", sources: List.new );
 
-        if(
-            manifestPath.notNil
-            and: { File.exists(manifestPath) },
+        if( manifestPath.notNil and: { File.exists(manifestPath) },
             {
                 File.readAllString(manifestPath)
-                .split(Char.nl)
-                .do { |line|
+                .split( Char.nl )
+                .do {| line |
                     var fields;
 
-                    fields = line.split(Char.tab);
+                    fields = line.split( Char.tab );
 
                     if(fields[0] == "project", {
                         manifest[\project] =
